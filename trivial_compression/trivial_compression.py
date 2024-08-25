@@ -6,16 +6,16 @@ class CompressedGene:
     self.bit_string: int = 1 # começa com uma sentinela
     for nucleotide in gene.upper():
       self.bit_string <<= 2 # desloca dois bits para a esquerda
-    if nucleotide == 'A': # muda os dois ultimos bits para 00
-      self.bit_string |= 0b00
-    elif nucleotide == 'C': # muda os dois ultimos bits para 01
-      self.bit_string |= 0b01
-    elif nucleotide == 'G': # muda os dois ultimos bits para 10
-      self.bit_string |= 0b10
-    elif nucleotide == 'T': # muda os dois ultimos bits para 11
-      self.bit_string |= 0b11
-    else:
-      raise ValueError('Invalid nucleotide: {}'.format(nucleotide))
+      if nucleotide == 'A': # muda os dois ultimos bits para 00
+        self.bit_string |= 0b00
+      elif nucleotide == 'C': # muda os dois ultimos bits para 01
+        self.bit_string |= 0b01
+      elif nucleotide == 'G': # muda os dois ultimos bits para 10
+        self.bit_string |= 0b10
+      elif nucleotide == 'T': # muda os dois ultimos bits para 11
+        self.bit_string |= 0b11
+      else:
+        raise ValueError('Invalid nucleotide: {}'.format(nucleotide))
   
   def decompress(self) -> str:
     gene: str = ''
@@ -38,7 +38,7 @@ class CompressedGene:
 
 if __name__ == '__main__':
   from sys import getsizeof
-  original: str = "TAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATATAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATA" 
+  original: str = "TAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATATAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATA" * 100
   print("original is {} bytes".format(getsizeof(original)))
   compressed: CompressedGene = CompressedGene(original) # compacta
   print("compressed is {} bytes".format(getsizeof(compressed)))
